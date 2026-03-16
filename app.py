@@ -8,10 +8,13 @@ st.set_page_config(page_title="דשבורד מפקחים - מדעים ומתמט
 # פונקציה לטעינת הנתונים
 @st.cache_data
 def load_data():
-    df1 = pd.read_csv('מתמטיקה+מדעים _ מחוז ועיר 16.03.csv')
-    df2 = pd.read_csv('ללא קורסים.csv')
+    try:
+        df1 = pd.read_csv('מתמטיקה+מדעים _ מחוז ועיר 16.03.csv', encoding='utf-8-sig')
+        df2 = pd.read_csv('ללא קורסים.csv', encoding='utf-8-sig')
+    except:
+        df1 = pd.read_csv('מתמטיקה+מדעים _ מחוז ועיר 16.03.csv', encoding='cp1255')
+        df2 = pd.read_csv('ללא קורסים.csv', encoding='cp1255')
     return df1, df2
-
 df1, df2 = load_data()
 
 # סרגל צד לבחירת מחוז תקשוב (הפרדה מוחלטת)
